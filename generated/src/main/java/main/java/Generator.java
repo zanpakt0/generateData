@@ -91,7 +91,7 @@ class Human {
         return flat;
     }
 
-    void setRandomSurname() throws IOException {
+    void setRandomSurName() throws IOException {
         HSSFWorkbook wb;
         if (this.sex.equals("МУЖ")) {
             wb = new HSSFWorkbook(new FileInputStream("manSurname.xls"));
@@ -172,7 +172,7 @@ class Generator {
         Human[] humans = new Human[count];
         for (int i = 0; i < count; i++) {
             Human human = getNameAndSex();
-            human.setRandomSurname();
+            human.setRandomSurName();
             human.setRandomPatronymic();
             human.setRandomDateOfBirthAndAge();
             human.setRandomCityBirth();
