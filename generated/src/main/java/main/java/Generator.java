@@ -91,7 +91,7 @@ class Human {
         return flat;
     }
 
-    void setSurname() throws IOException {
+    void setRandomSurname() throws IOException {
         HSSFWorkbook wb;
         if (this.sex.equals("МУЖ")) {
             wb = new HSSFWorkbook(new FileInputStream("manSurname.xls"));
@@ -102,7 +102,7 @@ class Human {
         this.surName = wb.getSheetAt(0).getRow(index).getCell(0).getRichStringCellValue().getString();
     }
 
-    void setPatronymic() throws IOException {
+    void setRandomPatronymic() throws IOException {
         HSSFWorkbook wb;
         if (this.sex.equals("МУЖ")) {
             wb = new HSSFWorkbook(new FileInputStream("manPatronymic.xls"));
@@ -113,7 +113,7 @@ class Human {
         this.patronymic = wb.getSheetAt(0).getRow(index).getCell(0).getRichStringCellValue().getString();
     }
 
-    void setDateOfBirthAndAge() {
+    void setRandomDateOfBirthAndAge() {
         Date currentDate;
         currentDate = new Date((long) (Math.random() * (new Date().getTime())));
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
@@ -123,45 +123,45 @@ class Human {
         this.age = Integer.parseInt(yearFormat.format(dTime)) - 1970;
     }
 
-    void setCityBirth() throws IOException {
+    void setRandomCityBirth() throws IOException {
         HSSFWorkbook wb = new HSSFWorkbook(new FileInputStream("city.xls"));
         int index = (int) (Math.random() * wb.getSheetAt(0).getPhysicalNumberOfRows());
         this.cityBirth = wb.getSheetAt(0).getRow(index).getCell(0).getRichStringCellValue().getString();
     }
 
-    void setPostIndex() {
+    void setRandomPostIndex() {
         this.postIndex = (int) (100000 + Math.random() * 900000);
     }
 
-    void setCountry() throws IOException {
+    void setRandomCountry() throws IOException {
         HSSFWorkbook wb = new HSSFWorkbook(new FileInputStream("country.xls"));
         int index = (int) (Math.random() * wb.getSheetAt(0).getPhysicalNumberOfRows());
         this.country = wb.getSheetAt(0).getRow(index).getCell(0).getRichStringCellValue().getString();
     }
 
-    void setRegion() throws IOException {
+    void setRandomRegion() throws IOException {
         HSSFWorkbook wb = new HSSFWorkbook(new FileInputStream("region.xls"));
         int index = (int) (Math.random() * wb.getSheetAt(0).getPhysicalNumberOfRows());
         this.region = wb.getSheetAt(0).getRow(index).getCell(0).getRichStringCellValue().getString();
     }
 
-    void setCityResidence() throws IOException {
+    void setRandomCityResidence() throws IOException {
         HSSFWorkbook wb = new HSSFWorkbook(new FileInputStream("city.xls"));
         int index = (int) (Math.random() * wb.getSheetAt(0).getPhysicalNumberOfRows());
         this.cityResidence = wb.getSheetAt(0).getRow(index).getCell(0).getRichStringCellValue().getString();
     }
 
-    void setStreet() throws IOException {
+    void setRandomStreet() throws IOException {
         HSSFWorkbook wb = new HSSFWorkbook(new FileInputStream("street.xls"));
         int index = (int) (Math.random() * wb.getSheetAt(0).getPhysicalNumberOfRows());
         this.street = wb.getSheetAt(0).getRow(index).getCell(0).getRichStringCellValue().getString();
     }
 
-    void setHouse() {
+    void setRandomHouse() {
         this.house = (int) (1 + Math.random() * 300);
     }
 
-    void setFlat() {
+    void setRandomFlat() {
         this.flat = (int) (1 + Math.random() * 500);
     }
 }
@@ -172,17 +172,17 @@ class Generator {
         Human[] humans = new Human[count];
         for (int i = 0; i < count; i++) {
             Human human = getNameAndSex();
-            human.setSurname();
-            human.setPatronymic();
-            human.setDateOfBirthAndAge();
-            human.setCityBirth();
-            human.setPostIndex();
-            human.setCountry();
-            human.setRegion();
-            human.setCityResidence();
-            human.setHouse();
-            human.setFlat();
-            human.setStreet();
+            human.setRandomSurname();
+            human.setRandomPatronymic();
+            human.setRandomDateOfBirthAndAge();
+            human.setRandomCityBirth();
+            human.setRandomPostIndex();
+            human.setRandomCountry();
+            human.setRandomRegion();
+            human.setRandomCityResidence();
+            human.setRandomHouse();
+            human.setRandomFlat();
+            human.setRandomStreet();
             humans[i] = human;
         }
         return humans;
@@ -217,7 +217,7 @@ class RighterToExcel {
             row.createCell(i).setCellValue(column[i]);
         }
         for (Human human : humans) {
-            createSheet(sheet, ++rowNum, human);
+            createRow(sheet, ++rowNum, human);
         }
         String path = String.valueOf(new File(fileName).getCanonicalFile());
         FileOutputStream out = new FileOutputStream(fileName);
@@ -227,7 +227,7 @@ class RighterToExcel {
 
     }
 
-    private static void createSheet(HSSFSheet sheet, int rowNum, Human human) {
+    private static void createRow(HSSFSheet sheet, int rowNum, Human human) {
         Row row = sheet.createRow(rowNum);
         row.createCell(0).setCellValue(human.getName());
         row.createCell(1).setCellValue(human.getSurName());
