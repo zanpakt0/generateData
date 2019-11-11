@@ -1,7 +1,7 @@
 # Data Generation Program
 Сonsole program that generated humans data
 
--В файле names.xls хранится база имен, разделенная по половому признаку;
+*В файле names.xls хранится база имен, разделенная по половому признаку;
 -в файле manSurname.xls хранится база мужских фамилий;
 -В файле womanSurname.xls хранится база женских фамилий;
 -в файле manPatronymic.xls хранится база мужских отчеств;
